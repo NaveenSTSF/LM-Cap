@@ -1,0 +1,172 @@
+:host {
+  --ink: #16324f;
+  --muted: #5f7185;
+  --line: #dce5ee;
+  --soft: #f5f8fb;
+  --accent: #087f8c;
+  display: block;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: linear-gradient(118deg, #eef8f7 0%, #f7fbfd 58%, #eef3fb 100%);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-icon {
+  display: grid;
+  flex: 0 0 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border-radius: 0.75rem;
+  background: #d5f0ee;
+}
+
+.hero-icon lightning-icon {
+  --slds-c-icon-color-foreground-default: var(--accent);
+}
+
+.hero-copy {
+  min-width: 0;
+}
+
+.eyebrow,
+.section-kicker,
+.metric-label {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  margin: 0.12rem 0 0;
+  color: var(--ink);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.hero-subtitle {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+}
+
+.metric-card {
+  min-width: 0;
+  padding: 0.65rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+  background: var(--soft);
+}
+
+.metric-value {
+  overflow: hidden;
+  margin: 0.25rem 0 0;
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metric-value-large {
+  font-size: 0.95rem;
+}
+
+.website-value {
+  color: var(--accent);
+}
+
+.section {
+  border-top: 1px solid var(--line);
+  padding-top: 0.85rem;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+}
+
+.section-heading h2 {
+  margin: 0.15rem 0 0;
+  color: var(--ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.count-badge {
+  display: inline-grid;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.35rem;
+  place-items: center;
+  border-radius: 999px;
+  background: #e2f2f1;
+  color: #086b74;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.table-shell {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+}
+
+.table-shell lightning-datatable {
+  --slds-c-table-cell-spacing-block: 0.45rem;
+  --slds-c-table-cell-spacing-inline: 0.55rem;
+}
+
+.state {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.78rem;
+}
+
+.state-empty {
+  justify-content: center;
+  border: 1px dashed var(--line);
+  background: var(--soft);
+  color: var(--muted);
+}
+
+.state-error {
+  background: #fff3f1;
+  color: #ba0517;
+}
+
+@media (max-width: 680px) {
+  .summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .identity {
+    grid-column: 1 / -1;
+  }
+}

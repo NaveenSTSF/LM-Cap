@@ -1,0 +1,134 @@
+<template>
+  <lightning-card class="snapshot-card">
+    <div
+      class="hero slds-p-horizontal_medium slds-p-top_medium slds-p-bottom_small"
+    >
+      <div class="hero-icon">
+        <lightning-icon
+          icon-name="standard:account"
+          alternative-text="Account"
+          size="small"
+        ></lightning-icon>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">Account intelligence</p>
+        <h1 class="hero-title">Account Snapshot</h1>
+        <p class="hero-subtitle">
+          A quick view of the people and pipeline connected to this account.
+        </p>
+      </div>
+    </div>
+    <template lwc:if={accountError}>
+      <div
+        class="state state-error slds-m-horizontal_medium slds-m-bottom_medium"
+      >
+        <lightning-icon
+          icon-name="utility:error"
+          alternative-text="Error"
+          size="x-small"
+        ></lightning-icon>
+        {accountError}
+      </div>
+    </template>
+    <template lwc:else>
+      <div class="summary slds-p-horizontal_medium slds-p-bottom_medium">
+        <div class="identity metric-card">
+          <p class="metric-label">Account</p>
+          <p class="metric-value metric-value-large">{accountName}</p>
+        </div>
+        <div class="metric-card">
+          <p class="metric-label">Industry</p>
+          <p class="metric-value">{accountIndustry}</p>
+        </div>
+        <div class="metric-card">
+          <p class="metric-label">Phone</p>
+          <p class="metric-value">{accountPhone}</p>
+        </div>
+        <div class="metric-card">
+          <p class="metric-label">Website</p>
+          <p class="metric-value website-value">{accountWebsite}</p>
+        </div>
+      </div>
+    </template>
+
+    <div class="section slds-p-horizontal_medium slds-p-bottom_medium">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">People</p>
+          <h2>Recent Contacts</h2>
+        </div>
+        <span class="count-badge">{contactRows.length}</span>
+      </div>
+      <template lwc:if={contactsError}>
+        <div class="state state-error">
+          <lightning-icon
+            icon-name="utility:error"
+            alternative-text="Error"
+            size="x-small"
+          ></lightning-icon
+          >{contactsError}
+        </div>
+      </template>
+      <template lwc:elseif={hasContacts}>
+        <div class="table-shell">
+          <lightning-datatable
+            key-field="id"
+            data={contactRows}
+            columns={contactColumns}
+            hide-checkbox-column
+          ></lightning-datatable>
+        </div>
+      </template>
+      <template lwc:else>
+        <div class="state state-empty">
+          <lightning-icon
+            icon-name="standard:contact"
+            alternative-text="Contacts"
+            size="small"
+          ></lightning-icon
+          ><span>No contacts found for this account.</span>
+        </div>
+      </template>
+    </div>
+
+    <div class="section slds-p-horizontal_medium slds-p-bottom_medium">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Pipeline</p>
+          <h2>Recent Opportunities</h2>
+        </div>
+        <span class="count-badge">{opportunityRows.length}</span>
+      </div>
+      <template lwc:if={opportunitiesError}>
+        <div class="state state-error">
+          <lightning-icon
+            icon-name="utility:error"
+            alternative-text="Error"
+            size="x-small"
+          ></lightning-icon
+          >{opportunitiesError}
+        </div>
+      </template>
+      <template lwc:elseif={hasOpportunities}>
+        <div class="table-shell">
+          <lightning-datatable
+            key-field="id"
+            data={opportunityRows}
+            columns={opportunityColumns}
+            hide-checkbox-column
+          ></lightning-datatable>
+        </div>
+      </template>
+      <template lwc:else>
+        <div class="state state-empty">
+          <lightning-icon
+            icon-name="standard:opportunity"
+            alternative-text="Opportunities"
+            size="small"
+          ></lightning-icon
+          ><span>No opportunities found for this account.</span>
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>
