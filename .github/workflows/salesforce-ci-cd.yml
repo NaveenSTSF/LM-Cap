@@ -68,10 +68,20 @@ jobs:
           fi
           printf '%s' "$SFDX_AUTH_URL" | sf org login sfdx-url --sfdx-url-stdin=- --alias ci-org --set-default
 
+      - name: Select Salesforce test level
+        id: test-level
+        shell: bash
+        run: |
+          if find force-app -type f \( -name '*.cls' -o -name '*.trigger' \) -print -quit | grep -q .; then
+            echo "level=RunLocalTests" >> "$GITHUB_OUTPUT"
+          else
+            echo "level=NoTestRun" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Validate pull request deployment
         if: github.event_name == 'pull_request'
-        run: sf project deploy start --source-dir force-app --target-org ci-org --dry-run --test-level RunLocalTests --wait 30
+        run: sf project deploy start --source-dir force-app --target-org ci-org --dry-run --test-level "${{ steps.test-level.outputs.level }}" --wait 30
 
       - name: Deploy main branch
         if: github.event_name != 'pull_request'
-        run: sf project deploy start --source-dir force-app --target-org ci-org --test-level RunLocalTests --wait 30
+        run: sf project deploy start --source-dir force-app --target-org ci-org --test-level "${{ steps.test-level.outputs.level }}" --wait 30
