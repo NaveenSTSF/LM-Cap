@@ -66,7 +66,7 @@ jobs:
             echo "SFDX_AUTH_URL is not configured for this GitHub environment."
             exit 1
           fi
-          printf '%s' "$SFDX_AUTH_URL" | sf org login sfdx-url --sfdx-url-stdin --alias ci-org --set-default
+          printf '%s' "$SFDX_AUTH_URL" | sf org login sfdx-url --sfdx-url-stdin=true --alias ci-org --set-default
 
       - name: Validate pull request deployment
         if: github.event_name == 'pull_request'
